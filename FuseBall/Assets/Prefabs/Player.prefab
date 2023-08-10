@@ -207,7 +207,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &3344104183906437029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,12 +222,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNum: 1
   moveSpeed: 12
-  minStrikeSpeed: 6
-  strikeDelay: 1
-  strikeRange: 2.5
-  dodgeDelay: 1
+  minStrikeSpeed: 12
+  strikeDelay: 0.5
+  strikeRange: 3.5
+  dodgeDelay: 0.75
   knockbackStunLength: 0.5
-  dodgeDuration: 1
+  dodgeDuration: 0.25
   fuseDuration: 60
   dodgeFuseDepletionAmount: 1
   powerStrike: 0

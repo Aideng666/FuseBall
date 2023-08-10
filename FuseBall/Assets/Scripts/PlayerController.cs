@@ -217,11 +217,11 @@ public class PlayerController : MonoBehaviour
 
         if (playerNum == 1)
         {
-            //dodgePressed = InputManager.Instance.Dodge1();
+            dodgePressed = InputManager.Instance.Dodge1();
         }
         if (playerNum == 2)
         {
-            //dodgePressed = InputManager.Instance.Dodge2();
+            dodgePressed = InputManager.Instance.Dodge2();
         }
 
         if (dodgePressed && CanDodge())
@@ -241,8 +241,7 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        //AnimationManager.Instance.Death(playerNum);
-
+        AnimationManager.Instance.Death(playerNum);
 
         print($"Player {playerNum} Has Exploded!");
 
