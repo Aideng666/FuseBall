@@ -25,15 +25,15 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (body.velocity.magnitude >= maxSpeed)
+        if (body.linearVelocity.magnitude >= maxSpeed)
         {
-            body.velocity = body.velocity.normalized * maxSpeed;
+            body.linearVelocity = body.linearVelocity.normalized * maxSpeed;
         }
     }
 
     public float GetSpeed()
     {
-        return body.velocity.magnitude;
+        return body.linearVelocity.magnitude;
     }
 
     IEnumerator ResetBall()
@@ -41,7 +41,7 @@ public class Ball : MonoBehaviour
         sprite.enabled = false;
         col.enabled = false;
         trail.enabled = false;
-        body.velocity = Vector2.zero;
+        body.linearVelocity = Vector2.zero;
 
         yield return new WaitForSeconds(3);
 

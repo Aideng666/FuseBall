@@ -97,37 +97,37 @@ public class PlayerController : MonoBehaviour
             inputDirection = InputManager.Instance.Move2();
         }
 
-        body.velocity = inputDirection.normalized * moveSpeed;
+        body.linearVelocity = inputDirection.normalized * moveSpeed;
 
-        if (body.velocity.x > 0/* && body.velocity.x > body.velocity.y*/)
+        if (body.linearVelocity.x > 0/* && body.velocity.x > body.velocity.y*/)
         {
             AnimationManager.Instance.WalkRight(playerNum);
             AnimationManager.Instance.WalkLeft(playerNum, false);
             AnimationManager.Instance.WalkUp(playerNum, false);
             AnimationManager.Instance.WalkDown(playerNum, false);
         }
-        else if (body.velocity.x < 0/* && body.velocity.x < body.velocity.y*/)
+        else if (body.linearVelocity.x < 0/* && body.velocity.x < body.velocity.y*/)
         {
             AnimationManager.Instance.WalkLeft(playerNum);
             AnimationManager.Instance.WalkRight(playerNum, false);
             AnimationManager.Instance.WalkUp(playerNum, false);
             AnimationManager.Instance.WalkDown(playerNum, false);
         }
-        else if (body.velocity.y < 0/* && body.velocity.x < body.velocity.y*/)
+        else if (body.linearVelocity.y < 0/* && body.velocity.x < body.velocity.y*/)
         {
             AnimationManager.Instance.WalkDown(playerNum);
             AnimationManager.Instance.WalkRight(playerNum, false);
             AnimationManager.Instance.WalkUp(playerNum, false);
             AnimationManager.Instance.WalkLeft(playerNum, false);
         }
-        else if (body.velocity.y > 0/* && body.velocity.x < body.velocity.y*/)
+        else if (body.linearVelocity.y > 0/* && body.velocity.x < body.velocity.y*/)
         {
             AnimationManager.Instance.WalkUp(playerNum);
             AnimationManager.Instance.WalkRight(playerNum, false);
             AnimationManager.Instance.WalkLeft(playerNum, false);
             AnimationManager.Instance.WalkDown(playerNum, false);
         }
-        else if (body.velocity.magnitude == 0)
+        else if (body.linearVelocity.magnitude == 0)
         {
             AnimationManager.Instance.WalkUp(playerNum, false);
             AnimationManager.Instance.WalkRight(playerNum, false);
@@ -179,23 +179,23 @@ public class PlayerController : MonoBehaviour
             {
                 Vector2 strikeDirection = (ballsHit[i].transform.position - transform.position).normalized;
 
-                if (ballsHit[i].GetComponent<Rigidbody2D>().velocity.magnitude < minStrikeSpeed)
+                if (ballsHit[i].GetComponent<Rigidbody2D>().linearVelocity.magnitude < minStrikeSpeed)
                 {
                     if (powerStrike)
                     {
-                        ballsHit[i].GetComponent<Rigidbody2D>().velocity = strikeDirection * (minStrikeSpeed * 50);
+                        ballsHit[i].GetComponent<Rigidbody2D>().linearVelocity = strikeDirection * (minStrikeSpeed * 50);
                         powerStrike = false;
                     }
-                    ballsHit[i].GetComponent<Rigidbody2D>().velocity = strikeDirection * minStrikeSpeed;
+                    ballsHit[i].GetComponent<Rigidbody2D>().linearVelocity = strikeDirection * minStrikeSpeed;
                 }
                 else
                 {
                     if (powerStrike)
                     {
-                        ballsHit[i].GetComponent<Rigidbody2D>().velocity = strikeDirection * (ballsHit[i].GetComponent<Ball>().GetSpeed() * 10);
+                        ballsHit[i].GetComponent<Rigidbody2D>().linearVelocity = strikeDirection * (ballsHit[i].GetComponent<Ball>().GetSpeed() * 10);
                         powerStrike = false;
                     }
-                    ballsHit[i].GetComponent<Rigidbody2D>().velocity = strikeDirection * ballsHit[i].GetComponent<Ball>().GetSpeed();
+                    ballsHit[i].GetComponent<Rigidbody2D>().linearVelocity = strikeDirection * ballsHit[i].GetComponent<Ball>().GetSpeed();
                 }
             }
 
@@ -232,7 +232,7 @@ public class PlayerController : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("Intangible");
             collider.gameObject.layer = LayerMask.NameToLayer("Intangible");
 
-            Vector2 dodgeDirection = (body.velocity).normalized;
+            Vector2 dodgeDirection = (body.linearVelocity).normalized;
             //AudioManager.Instance.Play("Dodge");
 
             StartCoroutine(Dodge(dodgeDirection * (moveSpeed * 3)));
@@ -273,7 +273,7 @@ public class PlayerController : MonoBehaviour
 
         while (elaspedTime <= dodgeDuration)
         {
-            body.velocity = Vector3.Lerp(startVel, Vector3.zero, elaspedTime / dodgeDuration);
+            body.linearVelocity = Vector3.Lerp(startVel, Vector3.zero, elaspedTime / dodgeDuration);
 
             elaspedTime += Time.deltaTime;
 
@@ -362,7 +362,7 @@ public class PlayerController : MonoBehaviour
 
         while (elaspedTime <= knockbackStunLength)
         {
-            body.velocity = Vector3.Lerp(startVel, Vector3.zero, elaspedTime / knockbackStunLength);
+            body.linearVelocity = Vector3.Lerp(startVel, Vector3.zero, elaspedTime / knockbackStunLength);
 
             elaspedTime += Time.deltaTime;
 
